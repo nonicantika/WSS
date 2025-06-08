@@ -34,7 +34,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Icon kustom
 const wssIcon = L.icon({
-  iconUrl: 'https://raw.githubusercontent.com/nonicantika/WSS/WSS.png',
+  iconUrl: 'https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png',
   iconSize: [30, 30],
   iconAnchor: [15, 30],
   popupAnchor: [0, -30]
@@ -68,18 +68,18 @@ const layerControl = L.control.layers(null, overlays).addTo(map);
 L.control.scale().addTo(map);
 
 // Desa (polygon)
-loadLayer('desa.geojson', {
+loadLayer('Desa.geojson', {
   style: { fillColor: "#cddc39", fillOpacity: 0.4, stroke: false },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Wilayah Desa");
 
 // Batas Desa (line)
-loadLayer('data/batas_desa.geojson', {
+loadLayer('Batas_Desa.geojson', {
   style: { color: '#000', weight: 2, dashArray: '4' }
 }, "Batas Desa");
 
 // Zona Strategis (polygon)
-loadLayer('data/zona.geojson', {
+loadLayer('Zona_Strategis.geojson', {
   style: { color: '#f50057', weight: 1, fillOpacity: 0.4 },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Zona Strategis");
@@ -91,7 +91,7 @@ loadLayer('WSS.geojson', {
 }, "WSS");
 
 // Pelanggan (point hijau)
-loadLayer('data/pelanggan.geojson', {
+loadLayer('Pelanggan.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
     radius: 6, fillColor: "green", color: "darkgreen", weight: 1, fillOpacity: 0.7
   }),
@@ -99,7 +99,7 @@ loadLayer('data/pelanggan.geojson', {
 }, "Pelanggan");
 
 // Kompetitor (point hitam)
-loadLayer('data/kompetitor.geojson', {
+loadLayer('Kompetitor.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
     radius: 6, fillColor: "black", color: "gray", weight: 1, fillOpacity: 0.6
   }),
@@ -111,7 +111,7 @@ L.control({position: 'bottomright'}).onAdd = function() {
   const div = L.DomUtil.create('div', 'legend');
   div.innerHTML = `
     <b>Legenda</b><br>
-    <img src="WSS.png" width="20"> WSS<br>
+    <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> WSS<br>
     <span style="color:green;">●</span> Pelanggan<br>
     <span style="color:black;">●</span> Kompetitor<br>
     <span style="background:#f50057;">&nbsp;&nbsp;&nbsp;</span> Zona Strategis<br>
