@@ -1,0 +1,20 @@
+{
+"type": "FeatureCollection",
+"name": "Kompetitor",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "Kompetitor": "Steak Moen Moen Citarum", "Alamat": "Jl. Merdeka No.56", "Kelurahan": "Citarum", "Kecamatan": "Bandung Wetan", "Lintang": -6.908038716, "Bujur": 107.6114077 }, "geometry": { "type": "Point", "coordinates": [ 107.6114077, -6.908038716 ] } },
+{ "type": "Feature", "properties": { "id": 2, "Kompetitor": "Steak Moen Moen Kings SC Food Court", "Alamat": "Jl. Kepatihan", "Kelurahan": "Baloggede", "Kecamatan": "Regol", "Lintang": -6.922711457, "Bujur": 107.604905 }, "geometry": { "type": "Point", "coordinates": [ 107.604905, -6.922711457 ] } },
+{ "type": "Feature", "properties": { "id": 3, "Kompetitor": "Steak Moen-Moen Ubertos", "Alamat": "Jl. Raya Ujung Berung", "Kelurahan": "Pakemitan", "Kecamatan": "Cinambo", "Lintang": -6.915526705, "Bujur": 107.6966467 }, "geometry": { "type": "Point", "coordinates": [ 107.6966467, -6.915526705 ] } },
+{ "type": "Feature", "properties": { "id": 4, "Kompetitor": "Steak Moen Moen  Festival Citylink", "Alamat": "Jl. Peta No.241 Lt.03 FC-45", "Kelurahan": "Suka Asih", "Kecamatan": "Bojongloa Kaler", "Lintang": -6.929460478, "Bujur": 107.5860391 }, "geometry": { "type": "Point", "coordinates": [ 107.5860391, -6.929460478 ] } },
+{ "type": "Feature", "properties": { "id": 5, "Kompetitor": "SKY Steak & Pasta Sersan Bajuri", "Alamat": "Jl. Sersan Bajuri No.36", "Kelurahan": "Isola", "Kecamatan": "Sukasari", "Lintang": -6.856060042, "Bujur": 107.5927807 }, "geometry": { "type": "Point", "coordinates": [ 107.5927807, -6.856060042 ] } },
+{ "type": "Feature", "properties": { "id": 6, "Kompetitor": "SKY Steak & Pasta Champelas", "Alamat": "Jl. Cihampelas No.13a", "Kelurahan": "Pasir Kaliki", "Kecamatan": "Cicendo", "Lintang": -6.905486856, "Bujur": 107.6041882 }, "geometry": { "type": "Point", "coordinates": [ 107.6041882, -6.905486856 ] } },
+{ "type": "Feature", "properties": { "id": 7, "Kompetitor": "SKY Steak & Pasta Buah Batu", "Alamat": "Jl. Buah Batu", "Kelurahan": "Cijagra", "Kecamatan": "Lengkong", "Lintang": -6.938992399, "Bujur": 107.6249986 }, "geometry": { "type": "Point", "coordinates": [ 107.6249986, -6.938992399 ] } },
+{ "type": "Feature", "properties": { "id": 8, "Kompetitor": "Doublesteak Talagabodas", "Alamat": "Jl. Talaga Bodas No.22", "Kelurahan": "Malabar", "Kecamatan": "Lengkong", "Lintang": -6.928291112, "Bujur": 107.6209384 }, "geometry": { "type": "Point", "coordinates": [ 107.6209384, -6.928291112 ] } },
+{ "type": "Feature", "properties": { "id": 9, "Kompetitor": "Doublesteak Bengawan", "Alamat": "Jl. Bengawan No.79", "Kelurahan": "Cihapit", "Kecamatan": "Bandung Wetan", "Lintang": -6.906301278, "Bujur": 107.6264607 }, "geometry": { "type": "Point", "coordinates": [ 107.6264607, -6.906301278 ] } },
+{ "type": "Feature", "properties": { "id": 10, "Kompetitor": "Javan Steak & Pasta Tamansari", "Alamat": "Jl. Sulanjana No.9", "Kelurahan": "Tamansari", "Kecamatan": "Bandung Wetan", "Lintang": -6.900043177, "Bujur": 107.6112968 }, "geometry": { "type": "Point", "coordinates": [ 107.6112968, -6.900043177 ] } },
+{ "type": "Feature", "properties": { "id": 11, "Kompetitor": "Javan Steak & Pasta Gegerkalong", "Alamat": "Jl. Gegerkalong Hilir No.38", "Kelurahan": "Gegerkalong", "Kecamatan": "Sukasari", "Lintang": -6.869863561, "Bujur": 107.5911643 }, "geometry": { "type": "Point", "coordinates": [ 107.5911643, -6.869863561 ] } },
+{ "type": "Feature", "properties": { "id": 12, "Kompetitor": "Sir.loin Beefhouse Dago", "Alamat": "Jl. Imam Bonjol No.1", "Kelurahan": "Lebakgede", "Kecamatan": "Coblong", "Lintang": -6.894402759, "Bujur": 107.6151399 }, "geometry": { "type": "Point", "coordinates": [ 107.6151399, -6.894402759 ] } },
+{ "type": "Feature", "properties": { "id": 13, "Kompetitor": "Sir.loin Beefhouse  Paledang", "Alamat": "Jl. Karapitan No.34", "Kelurahan": "Paledang", "Kecamatan": "Lengkong", "Lintang": -6.925527547, "Bujur": 107.6170938 }, "geometry": { "type": "Point", "coordinates": [ 107.6170938, -6.925527547 ] } }
+]
+}

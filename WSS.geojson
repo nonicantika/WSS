@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "WSS",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "Cabang": "Waroeng Steak & Shake Purnawarman", "Alamat": "Jl. Purnawarman No.72", "Kelurahan": "Tamansari", "Kecamatan": "Bandung Wetan", "Lintang": -6.903654089, "Bujur": 107.6096636 }, "geometry": { "type": "Point", "coordinates": [ 107.6096636, -6.903654089 ] } },
+{ "type": "Feature", "properties": { "id": 2, "Cabang": "Waroeng Steak & Shake BKR Bandung", "Alamat": "Jl. BKR No.176", "Kelurahan": "Ciateul", "Kecamatan": "Regol", "Lintang": -6.937321935, "Bujur": 107.6081602 }, "geometry": { "type": "Point", "coordinates": [ 107.6081602, -6.937321935 ] } },
+{ "type": "Feature", "properties": { "id": 3, "Cabang": "Waroeng Steak & Shake Sindang Sirna", "Alamat": "Jl. Sindang Sirna No.23", "Kelurahan": "Gegerkalong", "Kecamatan": "Sukajadi", "Lintang": -6.878244309, "Bujur": 107.5919595 }, "geometry": { "type": "Point", "coordinates": [ 107.5919595, -6.878244309 ] } },
+{ "type": "Feature", "properties": { "id": 4, "Cabang": "Waroeng Steak & Shake Dipatiukur", "Alamat": "Jl. Dipati Ukur No.63", "Kelurahan": "Lebakgede", "Kecamatan": "Coblong", "Lintang": -6.890197367, "Bujur": 107.616237 }, "geometry": { "type": "Point", "coordinates": [ 107.616237, -6.890197367 ] } },
+{ "type": "Feature", "properties": { "id": 5, "Cabang": "Waroeng Steak & Shake Lombok", "Alamat": "Jl. Lombok No.9", "Kelurahan": "Merdeka", "Kecamatan": "Sumur Bandung", "Lintang": -6.910495401, "Bujur": 107.6184964 }, "geometry": { "type": "Point", "coordinates": [ 107.6184964, -6.910495401 ] } },
+{ "type": "Feature", "properties": { "id": 6, "Cabang": "Waroeng Steak & Shake Banteng Bandung", "Alamat": "Jl. Banteng No.14", "Kelurahan": "Malabar", "Kecamatan": "Lengkong", "Lintang": -6.931529626, "Bujur": 107.6191353 }, "geometry": { "type": "Point", "coordinates": [ 107.6191353, -6.931529626 ] } },
+{ "type": "Feature", "properties": { "id": 7, "Cabang": "Waroeng Steak & Shake Soekarno Hatta Bandung", "Alamat": "Jl. Soekarno-Hatta", "Kelurahan": "Gumuruh", "Kecamatan": "Batununggal", "Lintang": -6.946823316, "Bujur": 107.6365026 }, "geometry": { "type": "Point", "coordinates": [ 107.6365026, -6.946823316 ] } },
+{ "type": "Feature", "properties": { "id": 8, "Cabang": "Waroeng Steak & Shake Ujung Berung Bandung", "Alamat": "Jl. AH. Nasution No.311", "Kelurahan": "Pesanggrahan", "Kecamatan": "Ujung Berung", "Lintang": -6.917900383, "Bujur": 107.706873 }, "geometry": { "type": "Point", "coordinates": [ 107.706873, -6.917900383 ] } },
+{ "type": "Feature", "properties": { "id": 9, "Cabang": "Waroeng Steak & Shake Kopo Cirangrang Bandung", "Alamat": "Jl. Raya Kopo No.484", "Kelurahan": "Margahayu Utara", "Kecamatan": "Babakan Ciparay", "Lintang": -6.951889587, "Bujur": 107.5851952 }, "geometry": { "type": "Point", "coordinates": [ 107.5851952, -6.951889587 ] } },
+{ "type": "Feature", "properties": { "id": 10, "Cabang": "Waroeng Steak & Shake Lengkong Kecil", "Alamat": "Jl. Lengkong Kecil No.25", "Kelurahan": "Paledang", "Kecamatan": "Lengkong", "Lintang": -6.923096274, "Bujur": 107.6133263 }, "geometry": { "type": "Point", "coordinates": [ 107.6133263, -6.923096274 ] } }
+]
+}
