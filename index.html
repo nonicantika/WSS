@@ -112,7 +112,7 @@ loadLayer('Desa.geojson', {
   }
 }, "Wilayah Desa");
 
- loadLayer('Pemukiman.geojson', {
+loadLayer('Pemukiman.geojson', {
   style: {
     fillColor: '#86b65b',
     color: '#444',
@@ -175,7 +175,7 @@ loadLayer('Kompetitor.geojson', {
   }),
   onEachFeature: (f, l) =>
     l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
-}, "Kompetitor");
+}, "Kompetitor");  
 
 loadLayer('WSS.geojson', {
   pane: 'wssPane',
