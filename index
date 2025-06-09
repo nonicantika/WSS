@@ -16,6 +16,14 @@
       font-size: 12px;
       border: 1px solid #ccc;
     }
+    .diamond {
+      width: 12px;
+      height: 12px;
+      transform: rotate(45deg);
+      background: green;
+      display: inline-block;
+      margin-right: 5px;
+    }
   </style>
 </head>
 <body>
@@ -31,7 +39,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-// Custom WSS icon
 const wssIcon = L.icon({
   iconUrl: 'https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png',
   iconSize: [30, 30],
@@ -60,7 +67,6 @@ function loadLayer(url, options, name) {
 
 const overlays = {};
 const layerControl = L.control.layers(null, overlays).addTo(map);
-
 L.control.scale().addTo(map);
 
 // Load layers
@@ -84,8 +90,14 @@ loadLayer('WSS.geojson', {
 }, "WSS");
 
 loadLayer('Pelanggan.geojson', {
-  pointToLayer: (f, latlng) => L.circleMarker(latlng, {
-    radius: 6, fillColor: "green", color: "darkgreen", weight: 1, fillOpacity: 0.7
+  pointToLayer: (f, latlng) => L.regularPolygonMarker(latlng, {
+    numberOfSides: 4,
+    rotation: 45.0,
+    radius: 6,
+    fillColor: "green",
+    color: "darkgreen",
+    weight: 1,
+    fillOpacity: 0.7
   }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
 }, "Pelanggan");
@@ -103,13 +115,18 @@ L.control({position: 'bottomright'}).onAdd = function() {
   div.innerHTML = `
     <b>Legenda</b><br>
     <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> WSS<br>
-    <span style="color:green;">●</span> Pelanggan<br>
+    <div class="diamond"></div> Pelanggan<br>
     <span style="color:black;">●</span> Kompetitor<br>
     <span style="background:#f50057;">&nbsp;&nbsp;&nbsp;</span> Zona Strategis<br>
+    <span style="background:#cddc39;">&nbsp;&nbsp;&nbsp;</span> Lahan Permukiman<br>
+    <span style="border-bottom: 2px dashed black;">&nbsp;&nbsp;&nbsp;</span> Batas Desa<br>
   `;
   return div;
 }.addTo(map);
 </script>
+
+<!-- Leaflet.extra-markers + polygon marker plugin for diamond shape -->
+<script src="https://unpkg.com/leaflet-regular-polygon@1.0.2/leaflet.regularpolygon.min.js"></script>
 
 </body>
 </html>
