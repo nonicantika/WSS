@@ -88,17 +88,18 @@ L.control.scale().addTo(map);
 loadLayer('Desa.geojson', {
   style: { fillColor: "#cd4281", fillOpacity: 0.8, stroke: false },
   onEachFeature: (f, l) => {
-  const Kelurahan = f.properties['NAMOBJ'] || '-';
-  const Kecamatan = f.properties['WADMKC'] || '-';
-  const Kota = f.properties['WADMKK'] || '-';
-  const Provinsi = f.properties['WADMPR'] || '-';
+    const namaKel = f.properties['NAMOBJ'] || '-';
+    const kec = f.properties['WADMKC'] || '-';
+    const kota = f.properties['WADMKK'] || '-';
+    const prov = f.properties['WADMPR'] || '-';
 
-  l.bindPopup(`
-    <b>Kelurahan:</b> ${namaKel}<br>
-    <b>Kecamatan:</b> ${kec}<br>
-    <b>Kota:</b> ${kota}<br>
-    <b>Provinsi:</b> ${prov}
-  `);
+    l.bindPopup(`
+      <b>Kelurahan:</b> ${namaKel}<br>
+      <b>Kecamatan:</b> ${kec}<br>
+      <b>Kota:</b> ${kota}<br>
+      <b>Provinsi:</b> ${prov}
+    `);
+  }
 }, "Wilayah Desa");
 
 loadLayer('Pemukiman.geojson', {
@@ -112,17 +113,18 @@ loadLayer('Pemukiman.geojson', {
 loadLayer('Zona_Strategis.geojson', {
   style: { fillColor: '#becf50', weight: 1, fillOpacity: 0.8 },
   onEachFeature: (f, l) => {
-  const Kelurahan = f.properties['NAMOBJ'] || '-';
-  const Kecamatan = f.properties['WADMKC'] || '-';
-  const Kota = f.properties['WADMKK'] || '-';
-  const Provinsi = f.properties['WADMPR'] || '-';
+    const namaKel = f.properties['NAMOBJ'] || '-';
+    const kec = f.properties['WADMKC'] || '-';
+    const kota = f.properties['WADMKK'] || '-';
+    const prov = f.properties['WADMPR'] || '-';
 
-  l.bindPopup(`
-    <b>Kelurahan:</b> ${namaKel}<br>
-    <b>Kecamatan:</b> ${kec}<br>
-    <b>Kota:</b> ${kota}<br>
-    <b>Provinsi:</b> ${prov}
-  `);
+    l.bindPopup(`
+      <b>Kelurahan:</b> ${namaKel}<br>
+      <b>Kecamatan:</b> ${kec}<br>
+      <b>Kota:</b> ${kota}<br>
+      <b>Provinsi:</b> ${prov}
+    `);
+  }
 }, "Zona Strategis");
   
 loadLayer('Batas_Desa.geojson', {
