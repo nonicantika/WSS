@@ -86,7 +86,7 @@ L.control.scale().addTo(map);
 
 // Load layers
 loadLayer('Desa.geojson', {
-  style: { fillColor: "#cd4281", fillOpacity: 0.8, stroke: false },
+  style: { fillColor: "#d32f7f", fillOpacity: 0.8, stroke: false },
   onEachFeature: (f, l) => {
     const namaKel = f.properties['NAMOBJ'] || '-';
     const kec = f.properties['WADMKC'] || '-';
@@ -104,14 +104,20 @@ loadLayer('Desa.geojson', {
 
 loadLayer('Pemukiman.geojson', {
   style: {
-    fillColor: '#88a371',
-    weight: 1,
-    fillOpacity: 0.8
-  },
+    fillColor: '#795548',
+    color: '#444',
+    weight: 0.5,
+    fillOpacity: 0.7
+  }
 }, "Lahan Permukiman");
 
 loadLayer('Zona_Strategis.geojson', {
-  style: { fillColor: '#becf50', weight: 1, fillOpacity: 0.8 },
+  style: {
+    fillColor: '#becf50',
+    color: '#666',
+    weight: 1,
+    fillOpacity: 0.6
+  },
   onEachFeature: (f, l) => {
     const namaKel = f.properties['NAMOBJ'] || '-';
     const kec = f.properties['WADMKC'] || '-';
@@ -126,57 +132,64 @@ loadLayer('Zona_Strategis.geojson', {
     `);
   }
 }, "Zona Strategis");
-  
+
 loadLayer('Batas_Desa.geojson', {
-  style: { color: '#000', weight: 1, dashArray: '4' }
+  style: { color: '#000', weight: 1.2, dashArray: '4' }
 }, "Batas Desa");
 
 loadLayer('Jalan_Utama.geojson', {
   style: {
     color: '#6900da',
     weight: 2.5
-  },
+  }
 }, "Jalan Utama");
 
 loadLayer('Pelanggan.geojson', {
   pointToLayer: (f, latlng) => L.marker(latlng, {
     icon: L.divIcon({
       html: '<div class="diamond-icon"></div>',
-      className: '', 
-      iconSize: [10, 10]
+      className: '',
+      iconSize: [12, 12]
     })
   }),
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
+  onEachFeature: (f, l) =>
+    l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
 }, "Pelanggan");
 
 loadLayer('Kompetitor.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
-    radius: 6, fillColor: '#0fc9aa', color: "black", weight: 1
+    radius: 6,
+    fillColor: '#0fc9aa',
+    color: 'black',
+    weight: 1,
+    fillOpacity: 0.8
   }),
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
+  onEachFeature: (f, l) =>
+    l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
-  
+
 loadLayer('WSS.geojson', {
   pointToLayer: (f, latlng) => L.marker(latlng, { icon: wssIcon }),
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
-}, "WSS");
+  onEachFeature: (f, l) =>
+    l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
+}, "Waroeng Steak & Shake");
 
-// Legend control
+  
+// Legenda
 const legend = L.control({position: 'bottomright'});
 
-legend.onAdd = function(map) {
+legend.onAdd = function (map) {
   const div = L.DomUtil.create('div', 'legend');
   div.innerHTML = `
     <b>Legenda</b><br>
     <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> Waroeng Steak & Shake<br>
-    <div style="width:12px; height:12px; background:#8bc34a; border-radius:50%; display:inline-block; margin-right:4px;"></div> Kompetitor<br>
-    <div style="width:12px; height:12px; background:#00bcd4; border-radius:50%; display:inline-block; margin-right:4px;"></div> Pelanggan<br>
+    <div style="width:12px; height:12px; background:#0fc9aa; border-radius:50%; display:inline-block; margin-right:4px;"></div> Kompetitor<br>
+    <div style="width:12px; height:12px; background:#10e901; transform: rotate(45deg); border: 1px solid black; display:inline-block; margin-right:4px;"></div> Pelanggan<br>
     <div style="width:20px; height:2px; background:#6900da; display:inline-block; vertical-align:middle; margin-right:4px;"></div> Jalan Utama<br>
-    <div style="width:12px; height:12px; background:#cddc39; display:inline-block; margin-right:4px;"></div> Zona Strategis<br>
+    <div style="width:12px; height:12px; background:#becf50; display:inline-block; margin-right:4px;"></div> Zona Strategis<br>
     <div style="width:12px; height:12px; background:#795548; display:inline-block; margin-right:4px;"></div> Lahan Permukiman<br>
-    <div style="width:20px; height:2px; background: repeating-linear-gradient(to right, black 0, black 4px, transparent 4px, transparent 8px); display:inline-block; margin-right:4px; vertical-align:middle;"></div> Batas Desa<br>
-    <div style="width:12px; height:12px; background:#d32f7f; display:inline-block; margin-right:4px;"></div> Wilayah Desa<br>
-
+    <div style="width:20px; height:2px; background:black; border-bottom: 2px dashed black; display:inline-block; margin-right:4px; vertical-align:middle;"></div> Batas Desa<br>
+    <div style="width:12px; height:12px; background:#d32f7f; display:inline-block; margin-right:4px;"></div> Wilayah Desa
   `;
   return div;
 };
