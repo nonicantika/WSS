@@ -87,20 +87,42 @@ L.control.scale().addTo(map);
 // Load layers
 loadLayer('Desa.geojson', {
   style: { fillColor: "#cd4281", fillOpacity: 0.8, stroke: false },
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
+  onEachFeature: (f, l) => {
+  const Kelurahan = f.properties['NAMOBJ'] || '-';
+  const Kecamatan = f.properties['WADMKC'] || '-';
+  const Kota = f.properties['WADMKK'] || '-';
+  const Provinsi = f.properties['WADMPR'] || '-';
+
+  l.bindPopup(`
+    <b>Kelurahan:</b> ${namaKel}<br>
+    <b>Kecamatan:</b> ${kec}<br>
+    <b>Kota:</b> ${kota}<br>
+    <b>Provinsi:</b> ${prov}
+  `);
 }, "Wilayah Desa");
 
 loadLayer('Pemukiman.geojson', {
   style: {
-    color: '#88a371',
+    fillColor: '#88a371',
     weight: 1,
     fillOpacity: 0.8
   },
 }, "Lahan Permukiman");
 
 loadLayer('Zona_Strategis.geojson', {
-  style: { color: '#becf50', weight: 1, fillOpacity: 0.8 },
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
+  style: { fillColor: '#becf50', weight: 1, fillOpacity: 0.8 },
+  onEachFeature: (f, l) => {
+  const Kelurahan = f.properties['NAMOBJ'] || '-';
+  const Kecamatan = f.properties['WADMKC'] || '-';
+  const Kota = f.properties['WADMKK'] || '-';
+  const Provinsi = f.properties['WADMPR'] || '-';
+
+  l.bindPopup(`
+    <b>Kelurahan:</b> ${namaKel}<br>
+    <b>Kecamatan:</b> ${kec}<br>
+    <b>Kota:</b> ${kota}<br>
+    <b>Provinsi:</b> ${prov}
+  `);
 }, "Zona Strategis");
   
 loadLayer('Batas_Desa.geojson', {
@@ -127,7 +149,7 @@ loadLayer('Pelanggan.geojson', {
 
 loadLayer('Kompetitor.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
-    radius: 6, fillColor: '#0fc9aa', color: "black", weight: 2
+    radius: 6, fillColor: '#0fc9aa', color: "black", weight: 1
   }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
@@ -147,7 +169,7 @@ legend.onAdd = function(map) {
     <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> Waroeng Steak & Shake<br>
     <div style="width:12px; height:12px; background:#8bc34a; border-radius:50%; display:inline-block; margin-right:4px;"></div> Kompetitor<br>
     <div style="width:12px; height:12px; background:#00bcd4; border-radius:50%; display:inline-block; margin-right:4px;"></div> Pelanggan<br>
-    <div style="width:20px; height:2px; background:#ffee58; display:inline-block; vertical-align:middle; margin-right:4px;"></div> Jalan Utama<br>
+    <div style="width:20px; height:2px; background:#6900da; display:inline-block; vertical-align:middle; margin-right:4px;"></div> Jalan Utama<br>
     <div style="width:12px; height:12px; background:#cddc39; display:inline-block; margin-right:4px;"></div> Zona Strategis<br>
     <div style="width:12px; height:12px; background:#795548; display:inline-block; margin-right:4px;"></div> Lahan Permukiman<br>
     <div style="width:20px; height:2px; background: repeating-linear-gradient(to right, black 0, black 4px, transparent 4px, transparent 8px); display:inline-block; margin-right:4px; vertical-align:middle;"></div> Batas Desa<br>
