@@ -1,19 +1,20 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Peta Zona Strategis Lokasi Cabang Baru Waroeng Steak & Shake di Bandung</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    body, html { margin: 0; padding: 0; }
+    body, html { margin: 0; padding: 0; font-family: sans-serif; }
     #map { height: 100vh; }
     .legend {
       background: white;
       padding: 10px;
       line-height: 1.4em;
       font-size: 12px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
@@ -21,18 +22,16 @@
 
 <div id="map"></div>
 
-<!-- Leaflet -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 const map = L.map('map').setView([-6.9, 107.6], 12);
 
-// Basemap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-// Icon kustom
+// Custom WSS icon
 const wssIcon = L.icon({
   iconUrl: 'https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png',
   iconSize: [30, 30],
@@ -40,7 +39,6 @@ const wssIcon = L.icon({
   popupAnchor: [0, -30]
 });
 
-// Utility popup generator
 function makePopup(props, fields) {
   let html = '<table>';
   fields.forEach(f => {
@@ -50,7 +48,6 @@ function makePopup(props, fields) {
   return html;
 }
 
-// Layer loader
 function loadLayer(url, options, name) {
   fetch(url)
     .then(res => res.json())
@@ -64,33 +61,28 @@ function loadLayer(url, options, name) {
 const overlays = {};
 const layerControl = L.control.layers(null, overlays).addTo(map);
 
-// Skala
 L.control.scale().addTo(map);
 
-// Desa (polygon)
+// Load layers
 loadLayer('Desa.geojson', {
   style: { fillColor: "#cddc39", fillOpacity: 0.4, stroke: false },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Wilayah Desa");
 
-// Batas Desa (line)
 loadLayer('Batas_Desa.geojson', {
   style: { color: '#000', weight: 2, dashArray: '4' }
 }, "Batas Desa");
 
-// Zona Strategis (polygon)
 loadLayer('Zona_Strategis.geojson', {
   style: { color: '#f50057', weight: 1, fillOpacity: 0.4 },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Zona Strategis");
 
-// WSS (point + icon)
 loadLayer('WSS.geojson', {
   pointToLayer: (f, latlng) => L.marker(latlng, { icon: wssIcon }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "WSS");
 
-// Pelanggan (point hijau)
 loadLayer('Pelanggan.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
     radius: 6, fillColor: "green", color: "darkgreen", weight: 1, fillOpacity: 0.7
@@ -98,7 +90,6 @@ loadLayer('Pelanggan.geojson', {
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
 }, "Pelanggan");
 
-// Kompetitor (point hitam)
 loadLayer('Kompetitor.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
     radius: 6, fillColor: "black", color: "gray", weight: 1, fillOpacity: 0.6
@@ -106,7 +97,7 @@ loadLayer('Kompetitor.geojson', {
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
 
-// Legenda (opsional, bisa disesuaikan)
+// Legend control
 L.control({position: 'bottomright'}).onAdd = function() {
   const div = L.DomUtil.create('div', 'legend');
   div.innerHTML = `
