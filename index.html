@@ -86,7 +86,7 @@ L.control.scale().addTo(map);
 
 // Load layers
 loadLayer('Desa.geojson', {
-  style: { fillColor: "#cd4281", fillOpacity: 0.6, stroke: false },
+  style: { fillColor: "#cd4281", fillOpacity: 0.8, stroke: false },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Wilayah Desa");
 
@@ -94,17 +94,17 @@ loadLayer('Pemukiman.geojson', {
   style: {
     color: '#88a371',
     weight: 1,
-    fillOpacity: 0.4
+    fillOpacity: 0.8
   },
 }, "Lahan Permukiman");
 
 loadLayer('Zona_Strategis.geojson', {
-  style: { color: '#becf50', weight: 1, fillOpacity: 0.4 },
+  style: { color: '#becf50', weight: 1, fillOpacity: 0.8 },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Zona Strategis");
   
 loadLayer('Batas_Desa.geojson', {
-  style: { color: '#000', weight: 2, dashArray: '4' }
+  style: { color: '#000', weight: 1, dashArray: '4' }
 }, "Batas Desa");
 
 loadLayer('Jalan_Utama.geojson', {
@@ -127,7 +127,7 @@ loadLayer('Pelanggan.geojson', {
 
 loadLayer('Kompetitor.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
-    radius: 6, fillColor: '#0fc9aa', color: "black", weight: 1, fillOpacity: 0.6
+    radius: 6, fillColor: '#0fc9aa', color: "black", weight: 1
   }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
@@ -149,7 +149,7 @@ legend.onAdd = function(map) {
     <div style="width:12px; height:12px; background:#10e901; transform:rotate(45deg); border:1px solid blacl; display:inline-block; margin-right:4px;"></div> Pelanggan<br>
     <div style="width:12px; height:2px; background:#6900da; display:inline-block; margin-right:4px;"></div> Jalan Utama<br
     <div style="width:12px; height:12px; background:#becf50; display:inline-block; margin-right:4px;"></div> Zona Strategis<br>
-    <div style="width:12px; height:12px; background:#88a371; display:inline-block; margin-right:4px;"></div> Lahan Permukiman<br>
+    <div style="width:12px; height:12px; border-bottom: 2px dashed #88a371; display:inline-block; margin-right:4px; vertical-align: middle;"></div> Lahan Permukiman<br>
     <div style="width:12px; height:2px; background:black; display:inline-block; margin-right:4px;"></div> Batas Desa<br>
     <div style="width:12px; height:12px; background:#cd4281; display:inline-block; margin-right:4px;"></div> Wilayah Desa<br>
     
