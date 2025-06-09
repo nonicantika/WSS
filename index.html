@@ -16,17 +16,33 @@
       font-size: 12px;
       border: 1px solid #ccc;
     }
-    .diamond {
+    .diamond-icon {
+      background: green;
       width: 12px;
       height: 12px;
       transform: rotate(45deg);
-      background: green;
-      display: inline-block;
-      margin-right: 5px;
-    }
+      margin-top: 6px;
+      margin-left: 6px;
+      border: 1px solid darkgreen;
+  }   
+   #judul-peta {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  background: rgba(255,255,255,0.85);
+  padding: 6px;
+  z-index: 1000;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
   </style>
 </head>
 <body>
+<div id="judul-peta">
+  Peta Zona Strategis Lokasi Cabang Baru<br>Waroeng Steak & Shake di Kota Bandung
+</div>
 
 <div id="map"></div>
 
@@ -90,14 +106,11 @@ loadLayer('WSS.geojson', {
 }, "WSS");
 
 loadLayer('Pelanggan.geojson', {
-  pointToLayer: (f, latlng) => L.regularPolygonMarker(latlng, {
-    numberOfSides: 4,
-    rotation: 45.0,
-    radius: 6,
-    fillColor: "green",
-    color: "darkgreen",
-    weight: 1,
-    fillOpacity: 0.7
+  pointToLayer: (f, latlng) => L.marker(latlng, {
+    icon: L.divIcon({
+      className: 'diamond-icon',
+      iconSize: [14, 14]
+    })
   }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
 }, "Pelanggan");
@@ -110,12 +123,14 @@ loadLayer('Kompetitor.geojson', {
 }, "Kompetitor");
 
 // Legend control
-L.control({position: 'bottomright'}).onAdd = function() {
+const legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function(map) {
   const div = L.DomUtil.create('div', 'legend');
   div.innerHTML = `
     <b>Legenda</b><br>
     <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> Waroeng Steak & Shake<br>
-    <div class="diamond"></div> Pelanggan<br>
+    <div class="diamond-icon" style="display:inline-block;"></div> Pelanggan<br>
     <span style="color:black;">●</span> Kompetitor<br>
     <span style="background:#f50057;">&nbsp;&nbsp;&nbsp;</span> Zona Strategis<br>
     <span style="background:#cddc39;">&nbsp;&nbsp;&nbsp;</span> Lahan Permukiman<br>
@@ -123,7 +138,9 @@ L.control({position: 'bottomright'}).onAdd = function() {
     <span style="background:#cddc39;">&nbsp;&nbsp;&nbsp;</span> Wilayah Desa<br>
   `;
   return div;
-}.addTo(map);
+};
+
+legend.addTo(map);
 </script>
 
 <!-- Leaflet.extra-markers + polygon marker plugin for diamond shape -->
