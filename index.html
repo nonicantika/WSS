@@ -17,14 +17,13 @@
       border: 1px solid #ccc;
     }
     .diamond-icon {
-      background: green;
       width: 12px;
       height: 12px;
+      background: green;
       transform: rotate(45deg);
-      margin-top: 6px;
-      margin-left: 6px;
       border: 1px solid darkgreen;
-  }   
+      margin: auto;
+   }
    #judul-peta {
   position: absolute;
   top: 10px;
@@ -91,24 +90,35 @@ loadLayer('Desa.geojson', {
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Wilayah Desa");
 
-loadLayer('Batas_Desa.geojson', {
-  style: { color: '#000', weight: 2, dashArray: '4' }
-}, "Batas Desa");
+loadLayer('Pemukiman.geojson', {
+  style: {
+    color: '#fdd835',
+    weight: 1,
+    fillOpacity: 0.4
+  },
+}, "Lahan Permukiman");
 
 loadLayer('Zona_Strategis.geojson', {
   style: { color: '#f50057', weight: 1, fillOpacity: 0.4 },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Zona Strategis");
+  
+loadLayer('Batas_Desa.geojson', {
+  style: { color: '#000', weight: 2, dashArray: '4' }
+}, "Batas Desa");
 
-loadLayer('WSS.geojson', {
-  pointToLayer: (f, latlng) => L.marker(latlng, { icon: wssIcon }),
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
-}, "WSS");
+loadLayer('Jalan_Utama.geojson', {
+  style: {
+    color: '#e53935',
+    weight: 2.5
+  },
+}, "Jalan Utama");
 
 loadLayer('Pelanggan.geojson', {
   pointToLayer: (f, latlng) => L.marker(latlng, {
     icon: L.divIcon({
-      className: 'diamond-icon',
+      html: '<div class="diamond-icon"></div>',
+      className: '', 
       iconSize: [14, 14]
     })
   }),
@@ -121,6 +131,11 @@ loadLayer('Kompetitor.geojson', {
   }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
+  
+loadLayer('WSS.geojson', {
+  pointToLayer: (f, latlng) => L.marker(latlng, { icon: wssIcon }),
+  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
+}, "WSS");
 
 // Legend control
 const legend = L.control({position: 'bottomright'});
@@ -130,12 +145,13 @@ legend.onAdd = function(map) {
   div.innerHTML = `
     <b>Legenda</b><br>
     <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> Waroeng Steak & Shake<br>
-    <div class="diamond-icon" style="display:inline-block;"></div> Pelanggan<br>
-    <span style="color:black;">●</span> Kompetitor<br>
-    <span style="background:#f50057;">&nbsp;&nbsp;&nbsp;</span> Zona Strategis<br>
-    <span style="background:#cddc39;">&nbsp;&nbsp;&nbsp;</span> Lahan Permukiman<br>
-    <span style="border-bottom: 2px dashed black;">&nbsp;&nbsp;&nbsp;</span> Batas Desa<br>
-    <span style="background:#cddc39;">&nbsp;&nbsp;&nbsp;</span> Wilayah Desa<br>
+    <div class="diamond-icon" style="display:inline-block; vertical-align: middle;"></div> Pelanggan<br>
+    <div style="width:12px; height:12px; background:black; display:inline-block; margin-right:4px;"></div> Kompetitor<br>
+    <div style="width:12px; height:12px; background:#f50057; display:inline-block; margin-right:4px;"></div> Zona Strategis<br>
+    <div style="width:12px; height:12px; background:#fdd835; display:inline-block; margin-right:4px;"></div> Lahan Permukiman<br>
+    <div style="width:12px; height:2px; background:black; display:inline-block; margin-right:4px;"></div> Batas Desa<br>
+    <div style="width:12px; height:12px; background:#cddc39; display:inline-block; margin-right:4px;"></div> Wilayah Desa<br>
+
   `;
   return div;
 };
