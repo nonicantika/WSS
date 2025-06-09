@@ -38,13 +38,12 @@
     #footer {
       position: absolute;
       bottom: 5px;
-      width: 100%;
-      text-align: center;
+      right: 10px;
       font-size: 10px;
-      color: #333;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.5);
+      padding: 3px 6px;
+      border-radius: 4px;
       z-index: 1000;
-      padding: 2px;
     }
   </style>
 </head>
@@ -52,13 +51,20 @@
 <div id="judul-peta">
   Peta Zona Strategis Lokasi Cabang Baru<br>Waroeng Steak & Shake di Kota Bandung
 </div>
+
 <div id="map"></div>
-<div id="footer">Noni Cantika Wiguna | 23/514566/SV/22383</div>
+<div id="footer">Noni Cantika Wiguna — 23/514566/SV/22383</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
 const map = L.map('map').setView([-6.9, 107.6], 12);
+
+// Pane setup for layer control
+map.createPane('zonaPane'); map.getPane('zonaPane').style.zIndex = 401;
+map.createPane('jalanPane'); map.getPane('jalanPane').style.zIndex = 402;
+map.createPane('kompetitorPane'); map.getPane('kompetitorPane').style.zIndex = 403;
+map.createPane('pelangganPane'); map.getPane('pelangganPane').style.zIndex = 404;
+map.createPane('wssPane'); map.getPane('wssPane').style.zIndex = 405;
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
@@ -94,8 +100,7 @@ const overlays = {};
 const layerControl = L.control.layers(null, overlays).addTo(map);
 L.control.scale().addTo(map);
 
-// Urutan sesuai QGIS: desa, pemukiman, zona strategis, batas desa, jalan utama, pelanggan, kompetitor, wss
-
+// Layers
 loadLayer('Desa.geojson', {
   style: { fillColor: "#d32f7f", fillOpacity: 0.8, stroke: false },
   onEachFeature: (f, l) => {
@@ -117,6 +122,7 @@ loadLayer('Pemukiman.geojson', {
 }, "Lahan Permukiman");
 
 loadLayer('Zona_Strategis.geojson', {
+  pane: 'zonaPane',
   style: {
     fillColor: '#becf50',
     color: '#666',
@@ -133,18 +139,19 @@ loadLayer('Zona_Strategis.geojson', {
 }, "Zona Strategis");
 
 loadLayer('Batas_Desa.geojson', {
-  style: { color: '#000', weight: 1.5, dashArray: '4' }
+  style: { color: '#000', weight: 1.2, dashArray: '4' }
 }, "Batas Desa");
 
 loadLayer('Jalan_Utama.geojson', {
+  pane: 'jalanPane',
   style: {
     color: '#6900da',
-    weight: 3,
-    opacity: 1
+    weight: 2.5
   }
 }, "Jalan Utama");
 
 loadLayer('Pelanggan.geojson', {
+  pane: 'pelangganPane',
   pointToLayer: (f, latlng) => L.marker(latlng, {
     icon: L.divIcon({
       html: '<div class="diamond-icon"></div>',
@@ -152,29 +159,33 @@ loadLayer('Pelanggan.geojson', {
       iconSize: [12, 12]
     })
   }),
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
+  onEachFeature: (f, l) =>
+    l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
 }, "Pelanggan");
 
 loadLayer('Kompetitor.geojson', {
+  pane: 'kompetitorPane',
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
     radius: 6,
     fillColor: '#0fc9aa',
     color: 'black',
     weight: 1,
-    fillOpacity: 0.9
+    fillOpacity: 0.8
   }),
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
+  onEachFeature: (f, l) =>
+    l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
 
 loadLayer('WSS.geojson', {
+  pane: 'wssPane',
   pointToLayer: (f, latlng) => L.marker(latlng, { icon: wssIcon }),
-  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
+  onEachFeature: (f, l) =>
+    l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Waroeng Steak & Shake");
 
 // Legend
 const legend = L.control({position: 'bottomright'});
-
-legend.onAdd = function (map) {
+legend.onAdd = function () {
   const div = L.DomUtil.create('div', 'legend');
   div.innerHTML = `
     <b>Legenda</b><br>
@@ -184,13 +195,13 @@ legend.onAdd = function (map) {
     <div style="width:20px; height:2px; background:#6900da; display:inline-block; vertical-align:middle; margin-right:4px;"></div> Jalan Utama<br>
     <div style="width:12px; height:12px; background:#becf50; display:inline-block; margin-right:4px;"></div> Zona Strategis<br>
     <div style="width:12px; height:12px; background:#795548; display:inline-block; margin-right:4px;"></div> Lahan Permukiman<br>
-    <div style="width:20px; height:2px; background:black; border-bottom: 2px dashed black; display:inline-block; margin-right:4px; vertical-align:middle;"></div> Batas Desa<br>
+    <div style="width:20px; height:2px; border-bottom: 2px dashed black; display:inline-block; margin-right:4px; vertical-align:middle;"></div> Batas Desa<br>
     <div style="width:12px; height:12px; background:#d32f7f; display:inline-block; margin-right:4px;"></div> Wilayah Desa
   `;
   return div;
 };
-
 legend.addTo(map);
 </script>
+
 </body>
 </html>
