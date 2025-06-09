@@ -86,20 +86,20 @@ L.control.scale().addTo(map);
 
 // Load layers
 loadLayer('Desa.geojson', {
-  style: { fillColor: "#cddc39", fillOpacity: 0.4, stroke: false },
+  style: { fillColor: "#cd4281", fillOpacity: 0.6, stroke: false },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Wilayah Desa");
 
 loadLayer('Pemukiman.geojson', {
   style: {
-    color: '#fdd835',
+    color: '#88a371',
     weight: 1,
     fillOpacity: 0.4
   },
 }, "Lahan Permukiman");
 
 loadLayer('Zona_Strategis.geojson', {
-  style: { color: '#f50057', weight: 1, fillOpacity: 0.4 },
+  style: { color: '#becf50', weight: 1, fillOpacity: 0.4 },
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['NAMOBJ', 'WADMKC', 'WADMKK', 'WADMPR']))
 }, "Zona Strategis");
   
@@ -109,7 +109,7 @@ loadLayer('Batas_Desa.geojson', {
 
 loadLayer('Jalan_Utama.geojson', {
   style: {
-    color: '#e53935',
+    color: '#6900da',
     weight: 2.5
   },
 }, "Jalan Utama");
@@ -119,7 +119,7 @@ loadLayer('Pelanggan.geojson', {
     icon: L.divIcon({
       html: '<div class="diamond-icon"></div>',
       className: '', 
-      iconSize: [14, 14]
+      iconSize: [12, 12]
     })
   }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
@@ -127,7 +127,7 @@ loadLayer('Pelanggan.geojson', {
 
 loadLayer('Kompetitor.geojson', {
   pointToLayer: (f, latlng) => L.circleMarker(latlng, {
-    radius: 6, fillColor: "black", color: "gray", weight: 1, fillOpacity: 0.6
+    radius: 6, fillColor: #0fc9aa, color: "gray", weight: 1, fillOpacity: 0.6
   }),
   onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
