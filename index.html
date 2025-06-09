@@ -114,12 +114,13 @@ L.control({position: 'bottomright'}).onAdd = function() {
   const div = L.DomUtil.create('div', 'legend');
   div.innerHTML = `
     <b>Legenda</b><br>
-    <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> WSS<br>
+    <img src="https://raw.githubusercontent.com/nonicantika/WSS/main/WSS.png" width="20"> Waroeng Steak & Shake<br>
     <div class="diamond"></div> Pelanggan<br>
     <span style="color:black;">●</span> Kompetitor<br>
     <span style="background:#f50057;">&nbsp;&nbsp;&nbsp;</span> Zona Strategis<br>
     <span style="background:#cddc39;">&nbsp;&nbsp;&nbsp;</span> Lahan Permukiman<br>
     <span style="border-bottom: 2px dashed black;">&nbsp;&nbsp;&nbsp;</span> Batas Desa<br>
+    <span style="background:#cddc39;">&nbsp;&nbsp;&nbsp;</span> Wilayah Desa<br>
   `;
   return div;
 }.addTo(map);
