@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,27 +22,38 @@
       transform: rotate(45deg);
       border: 1px solid black;
       margin: auto;
-   }
-   #judul-peta {
-  position: absolute;
-  top: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  background: rgba(255,255,255,0.85);
-  padding: 6px;
-  z-index: 1000;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-}
+    }
+    #judul-peta {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      background: rgba(255,255,255,0.85);
+      padding: 6px;
+      z-index: 1000;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    #footer {
+      position: absolute;
+      bottom: 5px;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      color: #333;
+      background: rgba(255,255,255,0.8);
+      z-index: 1000;
+      padding: 2px;
+    }
   </style>
 </head>
 <body>
 <div id="judul-peta">
   Peta Zona Strategis Lokasi Cabang Baru<br>Waroeng Steak & Shake di Kota Bandung
 </div>
-
 <div id="map"></div>
+<div id="footer">Noni Cantika Wiguna | 23/514566/SV/22383</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -84,7 +94,8 @@ const overlays = {};
 const layerControl = L.control.layers(null, overlays).addTo(map);
 L.control.scale().addTo(map);
 
-// Load layers
+// Urutan sesuai QGIS: desa, pemukiman, zona strategis, batas desa, jalan utama, pelanggan, kompetitor, wss
+
 loadLayer('Desa.geojson', {
   style: { fillColor: "#d32f7f", fillOpacity: 0.8, stroke: false },
   onEachFeature: (f, l) => {
@@ -92,13 +103,7 @@ loadLayer('Desa.geojson', {
     const kec = f.properties['WADMKC'] || '-';
     const kota = f.properties['WADMKK'] || '-';
     const prov = f.properties['WADMPR'] || '-';
-
-    l.bindPopup(`
-      <b>Kelurahan:</b> ${namaKel}<br>
-      <b>Kecamatan:</b> ${kec}<br>
-      <b>Kota:</b> ${kota}<br>
-      <b>Provinsi:</b> ${prov}
-    `);
+    l.bindPopup(`<b>Kelurahan:</b> ${namaKel}<br><b>Kecamatan:</b> ${kec}<br><b>Kota:</b> ${kota}<br><b>Provinsi:</b> ${prov}`);
   }
 }, "Wilayah Desa");
 
@@ -115,32 +120,27 @@ loadLayer('Zona_Strategis.geojson', {
   style: {
     fillColor: '#becf50',
     color: '#666',
-    weight: 1,
-    fillOpacity: 0.6
+    weight: 0.5,
+    fillOpacity: 0.5
   },
   onEachFeature: (f, l) => {
     const namaKel = f.properties['NAMOBJ'] || '-';
     const kec = f.properties['WADMKC'] || '-';
     const kota = f.properties['WADMKK'] || '-';
     const prov = f.properties['WADMPR'] || '-';
-
-    l.bindPopup(`
-      <b>Kelurahan:</b> ${namaKel}<br>
-      <b>Kecamatan:</b> ${kec}<br>
-      <b>Kota:</b> ${kota}<br>
-      <b>Provinsi:</b> ${prov}
-    `);
+    l.bindPopup(`<b>Kelurahan:</b> ${namaKel}<br><b>Kecamatan:</b> ${kec}<br><b>Kota:</b> ${kota}<br><b>Provinsi:</b> ${prov}`);
   }
 }, "Zona Strategis");
 
 loadLayer('Batas_Desa.geojson', {
-  style: { color: '#000', weight: 1.2, dashArray: '4' }
+  style: { color: '#000', weight: 1.5, dashArray: '4' }
 }, "Batas Desa");
 
 loadLayer('Jalan_Utama.geojson', {
   style: {
     color: '#6900da',
-    weight: 2.5
+    weight: 3,
+    opacity: 1
   }
 }, "Jalan Utama");
 
@@ -152,8 +152,7 @@ loadLayer('Pelanggan.geojson', {
       iconSize: [12, 12]
     })
   }),
-  onEachFeature: (f, l) =>
-    l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
+  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Nama', 'Alamat', 'Kelurahan', 'Kecamatan', 'Latitude', 'Longitude']))
 }, "Pelanggan");
 
 loadLayer('Kompetitor.geojson', {
@@ -162,20 +161,17 @@ loadLayer('Kompetitor.geojson', {
     fillColor: '#0fc9aa',
     color: 'black',
     weight: 1,
-    fillOpacity: 0.8
+    fillOpacity: 0.9
   }),
-  onEachFeature: (f, l) =>
-    l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
+  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Kompetitor', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Kompetitor");
 
 loadLayer('WSS.geojson', {
   pointToLayer: (f, latlng) => L.marker(latlng, { icon: wssIcon }),
-  onEachFeature: (f, l) =>
-    l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
+  onEachFeature: (f, l) => l.bindPopup(makePopup(f.properties, ['Cabang', 'Alamat', 'Kelurahan', 'Kecamatan', 'Lintang', 'Bujur']))
 }, "Waroeng Steak & Shake");
 
-  
-// Legenda
+// Legend
 const legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
@@ -196,8 +192,5 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 </script>
-
-<script src="https://unpkg.com/leaflet-regular-polygon@1.0.2/leaflet.regularpolygon.min.js"></script>
-
 </body>
 </html>
